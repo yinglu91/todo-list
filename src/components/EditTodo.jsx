@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../css/NewTodo.css';
 
-const NewTodo = (props) => {
+const EditTodo = (props) => {
+  console.log(props);
+
   const [todo, setTodo] = useState(props.todo);
 
   const onChange = (e) => {
@@ -32,4 +34,4 @@ const NewTodo = (props) => {
   );
 };
 
-export default NewTodo;
+export default EditTodo;

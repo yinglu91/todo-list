@@ -2,6 +2,8 @@ import React from 'react';
 import '../css/TodoList.css';
 
 const TodoList = (props) => {
+  console.log(props);
+
   return (
     <ul>
       {props.items.map((todo) => (

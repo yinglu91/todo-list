@@ -7,10 +7,10 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   const [current, setCurrent] = useState(null);
 
-  const addTodoHandler = (text) => {
+  const addTodoHandler = (newTodo) => {
     setTodos((prevTodos) => [
       ...prevTodos,
-      { id: Math.random().toString(), text },
+      { id: Math.random().toString(), ...newTodo },
     ]);
   };
 

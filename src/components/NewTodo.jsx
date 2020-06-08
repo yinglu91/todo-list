@@ -1,23 +1,35 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import '../css/NewTodo.css';
 
+const initTodo = { text: '' };
 const NewTodo = (props) => {
-  const textInputRef = useRef();
+  console.log(props);
+
+  const [todo, setTodo] = useState(initTodo);
+
+  const onChange = (e) => {
+    setTodo({ ...todo, [e.target.name]: e.target.value });
+  };
 
   const todoSubmitHandler = (event) => {
     event.preventDefault();
 
-    const enteredText = textInputRef.current.value;
-    props.onAddTodo(enteredText);
+    props.onAddTodo(todo);
 
-    textInputRef.current.value = '';
+    setTodo(initTodo);
   };
 
   return (
     <form onSubmit={todoSubmitHandler}>
       <div className='form-control'>
         <label htmlFor='text'>Todo Text</label>
-        <input type='text' id='text' name='text' ref={textInputRef} />
+        <input
+          type='text'
+          id='text'
+          name='text'
+          value={todo.text}
+          onChange={onChange}
+        />
       </div>
 
       <button type='submit'>ADD TODO</button>
