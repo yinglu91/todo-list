@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './NewTodo.css';
+import '../css/NewTodo.css';
 
 const NewTodo = (props) => {
   const textInputRef = useRef();

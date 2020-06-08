@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './NewTodo.css';
+import '../css/NewTodo.css';
 
 const NewTodo = (props) => {
   const [todo, setTodo] = useState(props.todo);
