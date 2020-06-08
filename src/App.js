@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TodoList from './components/TodoList';
+import NewTodo from './components/NewTodo';
+import EditTodo from './components/EditTodo';
 
-function App() {
+const App = () => {
+  const [todos, setTodos] = useState([]);
+  const [current, setCurrent] = useState(null);
+
+  const addTodoHandler = (text) => {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: Math.random().toString(), text },
+    ]);
+  };
+
+  const editTodoHandler = (todoEdited) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) =>
+        todo.id === todoEdited.id ? todoEdited : todo
+      );
+    });
+
+    setCurrent(null);
+  };
+
+  const deleteTodoHandler = (todoId) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== todoId);
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      {!current && <NewTodo onAddTodo={addTodoHandler} />}
+      {current && <EditTodo onEditTodo={editTodoHandler} todo={current} />}
+
+      <TodoList
+        items={todos}
+        setCurrent={setCurrent}
+        onDeleteTodo={deleteTodoHandler}
+      />
     </div>
   );
-}
+};
 
 export default App;
